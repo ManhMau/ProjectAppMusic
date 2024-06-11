@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-
+    // Existing dependencies
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,4 +40,20 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Additional dependencies
+
+    implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.squareup.retrofit2:retrofit:2.3.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation("com.squareup.picasso:picasso:2.5.2")
+    implementation("me.relex:circleindicator:2.1.6") // Updated version
+    implementation("de.hdodenhof:circleimageview:2.2.0")
+
+    // Updated androidx dependencies
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("com.google.android.material:material:1.4.0")
 }
+
+
