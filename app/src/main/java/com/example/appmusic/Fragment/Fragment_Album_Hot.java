@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appmusic.Adapter.AlbumAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -27,6 +30,7 @@ public class Fragment_Album_Hot extends Fragment {
     View view;
     RecyclerView recyclerViewAlbum;
     TextView txtxemthemalbum;
+    AlbumAdapter albumAdapter;
 
     @Nullable
     @Override
@@ -45,6 +49,11 @@ public class Fragment_Album_Hot extends Fragment {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 ArrayList<Album> albumArrayList = (ArrayList<Album>) response.body();
+                albumAdapter = new AlbumAdapter(getActivity(),albumArrayList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(linearLayoutManager.HORIZONTAL);
+                recyclerViewAlbum.setLayoutManager(linearLayoutManager);
+                recyclerViewAlbum.setAdapter(albumAdapter);
             }
 
             @Override
