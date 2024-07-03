@@ -8,7 +8,8 @@ import androidx.annotation.Nullable;
 import android.util.Log;
 
 import androidx.appcompat.widget.SearchView; // Ensure this is the correct import
-    import androidx.fragment.app.Fragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,36 +18,32 @@ import android.view.ViewGroup;
 import com.example.appmusic.R;
 
 public class Fragment_Trang_Chu extends Fragment {
-    View view;
-    SearchView searchView;
+    private View view;
+    private SearchView searchView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frapment_trang_chu, container, false);
 
-        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView = view.findViewById(R.id.searchView);
 
         if (searchView != null) {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            searchView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onQueryTextSubmit(String query) {
-                    // Xử lý khi người dùng nhấn nút tìm kiếm
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    // Xử lý khi người dùng nhập văn bản tìm kiếm
-                    return false;
+                public void onClick(View v) {
+                    // Chuyển đổi sang Fragment_Tim_Kiem khi nhấn vào ô tìm kiếm
+                    Fragment_Tim_Kiem fragmentTimKiem = new Fragment_Tim_Kiem();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, fragmentTimKiem);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
             });
         } else {
-            // Log hoặc xử lý lỗi nếu searchView là null
             Log.e("Fragment_Trang_Chu", "SearchView is null");
         }
 
         return view;
     }
-
 }

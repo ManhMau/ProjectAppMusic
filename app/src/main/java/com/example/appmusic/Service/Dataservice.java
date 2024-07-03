@@ -80,5 +80,8 @@ public interface Dataservice {
             @Field("phone") String phone,
             @Field("avatar") String avatar
     );
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<Songs>> GetSearchBaihat(@Field("tukhoa") String tukhoa);
 }
 
