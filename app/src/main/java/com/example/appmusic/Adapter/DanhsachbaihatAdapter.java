@@ -70,7 +70,7 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtcasi = itemView.findViewById(R.id.textviewtencasi);
-            txtindex = itemView.findViewById(R.id.textviewdanhsaschindex);
+            txtindex = itemView.findViewById(R.id.textviewdanhsachindex);
             txttenbaihat = itemView.findViewById(R.id.textviewtenbaihat);
             imgluotthich = itemView.findViewById(R.id.imageviewluotthichdanhsachbaihat);
             imgluotthich.setOnClickListener(new View.OnClickListener() {
