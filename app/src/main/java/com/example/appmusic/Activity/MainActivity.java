@@ -1,5 +1,7 @@
 package com.example.appmusic.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,7 +23,7 @@ import com.example.appmusic.Fragment.Fragment_Banner;
 import com.example.appmusic.Fragment.Fragment_Playlist;
 import com.example.appmusic.Fragment.Fragment_Trang_Chu;
 import com.example.appmusic.R;
-    import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -85,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.popular_songs) {
 
         } else if (id == R.id.favorite_songs) {
+
+        } else if (id == R.id.userprofile) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.change_password) {
 

@@ -1,5 +1,6 @@
 package com.example.appmusic.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appmusic.Activity.DanhsachtatcaAlbumActivity;
 import com.example.appmusic.Adapter.AlbumAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.R;
@@ -32,12 +34,20 @@ public class Fragment_Album_Hot extends Fragment {
     TextView txtxemthemalbum;
     AlbumAdapter albumAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album_hot,container,false);
         recyclerViewAlbum = view.findViewById(R.id.recycleviewalbum);
         txtxemthemalbum = view.findViewById((R.id.textviewxemthemalbum));
+        txtxemthemalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DanhsachtatcaAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
          GetData();
         return view;
     }

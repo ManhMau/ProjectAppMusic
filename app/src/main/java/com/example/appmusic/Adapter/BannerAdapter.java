@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -24,8 +25,9 @@ public class BannerAdapter extends PagerAdapter {
 
     public BannerAdapter(Context context, ArrayList<Banner> arrayListbanner) {
         this.context = context;
-        this.arrayListbanner = arrayListbanner;
+        this.arrayListbanner = arrayListbanner != null ? arrayListbanner : new ArrayList<Banner>();
     }
+
 
     @Override
     public int getCount() {
@@ -57,7 +59,8 @@ public class BannerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-                intent.putExtra("banner", arrayListbanner.get(position));
+                intent.putExtra("banner",arrayListbanner.get(position));
+
                 context.startActivity(intent);
             }
         });

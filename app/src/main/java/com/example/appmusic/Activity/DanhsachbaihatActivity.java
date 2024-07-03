@@ -5,6 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +32,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appmusic.Adapter.DanhsachbaihatAdapter;
+import com.example.appmusic.Model.Album;
+import com.example.appmusic.Model.Banner;
+import com.example.appmusic.Model.Playlist;
+import com.example.appmusic.Model.Songs;
+import com.example.appmusic.Model.Type;
 import com.example.appmusic.Model.Banner;
 import com.example.appmusic.Model.Songs;
 import com.example.appmusic.R;
@@ -42,15 +57,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DanhsachbaihatActivity extends AppCompatActivity {
-
+    Banner quangcao;
     CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    RecyclerView recyclerViewdanhsachbaihat;
     Toolbar toolbar;
+    RecyclerView recyclerViewdanhsachbaihat;
+
     FloatingActionButton floatingActionButton;
     ImageView imgdanhsachcakhuc;
     ArrayList<Songs> mangbaihat;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
+    Playlist playlist;
+    Type type;
+    Album album;
+
 
 
     Banner banner;
@@ -59,6 +79,32 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_danhsachbaihat);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        DataIntent();
+        anhxa();
+        init();
+        if(quangcao != null && !quangcao.getNameSong().equals("")){
+            setValueInview(quangcao.getNameSong(),quangcao.getImageSong());
+            GetDataQuangCao(quangcao.getIdBanner());
+        }
+        if(playlist != null && !playlist.getNamePlaylist().equals("")){
+            setValueInview(playlist.getNamePlaylist(),playlist.getImagePlaylist());
+            GetDataPlayList(playlist.getIdPlaylist());
+        }
+        if(type != null && !type.getNameType().equals("")){
+            setValueInview(type.getNameType(),type.getImageType());
+            GetDataTheLoai(type.getIdType());
+        }
+        if(album != null && !album.getNameAlbum().equals("")){
+          setValueInview(album.getNameAlbum(),album.getImageAlbum());
+          GetDataAlbum(album.getIdAlbum());
+        }
+    }
+
+    private void GetDataAlbum(String idAlbum) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Songs>> callback = dataservice.GetDanhsanhbaihattheoalbum(idAlbum);
         DataIntent();
         anhxa();
         init();
@@ -76,9 +122,11 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
                 mangbaihat = (ArrayList<Songs>) response.body();
-                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+                evenClick();
+
             }
 
             @Override
@@ -88,24 +136,101 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
 
-    private void setValueInView(String name, String image) {
-        collapsingToolbarLayout.setTitle(name);
+    private void GetDataTheLoai(String idtheloai){
+        Dataservice dataservice = APIService.getService();
+        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheotheloai(idtheloai);
+        callback.enqueue(new Callback<List<Songs>>() {
+            @Override
+            public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
+                if (response.body() != null) {
+                    Log.d("DanhsachbaihatActivity", "GetDataTheLoai onResponse: received data");
+                    mangbaihat = (ArrayList<Songs>) response.body();
+                    danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                    recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                    recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+                    evenClick();
+                } else {
+                    Log.d("DanhsachbaihatActivity", "GetDataTheLoai onResponse: response body is null");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Songs>> call, Throwable t) {
+                Log.e("DanhsachbaihatActivity", "GetDataTheLoai onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void GetDataPlayList(String idplaylist) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheoplaylist(idplaylist);
+        callback.enqueue(new Callback<List<Songs>>() {
+            @Override
+            public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
+                if (response.body() != null) {
+                    Log.d("DanhsachbaihatActivity", "GetDataPlayList onResponse: received data");
+                    mangbaihat = (ArrayList<Songs>) response.body();
+                    danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                    recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                    recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+                    evenClick();
+                } else {
+                    Log.d("DanhsachbaihatActivity", "GetDataPlayList onResponse: response body is null");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Songs>> call, Throwable t) {
+                Log.e("DanhsachbaihatActivity", "GetDataPlayList onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void GetDataQuangCao(String idquangcao) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheoquangcao(idquangcao);
+        callback.enqueue(new Callback<List<Songs>>() {
+            @Override
+            public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
+                if (response.body() != null) {
+                    Log.d("DanhsachbaihatActivity", "GetDataQuangCao onResponse: received data");
+                    mangbaihat = (ArrayList<Songs>) response.body();
+                    danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhsachbaihatActivity.this, mangbaihat);
+                    recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+                    recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+                    evenClick();
+                } else {
+                    Log.d("DanhsachbaihatActivity", "GetDataQuangCao onResponse: response body is null");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Songs>> call, Throwable t) {
+                Log.e("DanhsachbaihatActivity", "GetDataQuangCao onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void setValueInview(String ten, String hinh) {
+        collapsingToolbarLayout.setTitle(ten);
+
         try {
-            URL url = new URL(image);
+            URL url = new URL(hinh);
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
-                collapsingToolbarLayout.setBackground(bitmapDrawable);
-            }
+            collapsingToolbarLayout.setBackground(bitmapDrawable);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Picasso.with(this).load(image).into(imgdanhsachcakhuc);
+        Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
+
     }
 
-    private void init(){
+    private void init() {
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -116,6 +241,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        floatingActionButton.setEnabled(false);
+
     }
 
     private void anhxa() {
@@ -131,9 +258,32 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             if (intent.hasExtra("banner")) {
-                banner = (Banner) intent.getSerializableExtra("banner");
-                Toast.makeText(this,banner.getNameSong(), Toast.LENGTH_SHORT).show();
+                quangcao = (Banner) intent.getSerializableExtra("banner");
+                Log.d("DanhsachbaihatActivity", "Received Banner: " + quangcao.getIdBanner());
+            }
+            if (intent.hasExtra("itemplaylist")) {
+                playlist = (Playlist) intent.getSerializableExtra("itemplaylist");
+                Log.d("DanhsachbaihatActivity", "Received Playlist: " + playlist.getIdPlaylist());
+            }
+            if (intent.hasExtra("idtheloai")) {
+                type = (Type) intent.getSerializableExtra("idtheloai");
+                Log.d("DanhsachbaihatActivity", "Received Type: " + type.getIdType());
+            }
+            if (intent.hasExtra("album")) {
+                album = (Album) intent.getSerializableExtra("album");
             }
         }
     }
+    private void evenClick(){
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( DanhsachbaihatActivity.this, PlaynhacActivity.class);
+                intent.putExtra("cacbaihat",mangbaihat);
+                startActivity(intent);
+            }
+        });
+    }
 }
+

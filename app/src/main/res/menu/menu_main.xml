@@ -23,6 +23,11 @@
         android:icon="@drawable/iconlove"
         android:title="Favorite Songs" />
 
+        <item
+            android:id="@+id/userprofile"
+            android:icon="@drawable/profile"
+            android:title="Profile" />
+
     <item
         android:id="@+id/change_password"
         android:icon="@drawable/ic_changepass"
