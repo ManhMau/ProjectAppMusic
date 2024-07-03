@@ -1,6 +1,5 @@
 package com.example.appmusic.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.appmusic.Activity.DanhsachbaihatActivity;
-import com.example.appmusic.Activity.DanhsachtatcachudeActivity;
-import com.example.appmusic.Activity.DanhsachtheloaitheochudeActivity;
 import com.example.appmusic.Model.ChuDeVaTheLoai;
 import com.example.appmusic.Model.Theme;
 import com.example.appmusic.Model.Type;
@@ -45,13 +41,6 @@ public class Fragment_ChuDeVaTheLoai extends Fragment {
         view = inflater.inflate(R.layout.fragment_chudevatheloai,  container, false);
         horizontalScrollView = view.findViewById(R.id.horrizontalScrollview);
         txtxemthemchudetheloai = view.findViewById(R.id.textviewxemthemchude);
-        txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhsachtatcachudeActivity.class);
-                startActivity(intent);
-            }
-        });
         GetData();
         return view;
     }
@@ -86,15 +75,6 @@ public class Fragment_ChuDeVaTheLoai extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
-                    int finalI = i;
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), DanhsachtheloaitheochudeActivity.class);
-                            intent.putExtra("chude",chudeArrayList.get(finalI));
-                            startActivity(intent);
-                        }
-                    });
                 }
                 for (int j = 0; j < (theloaiArrayList.size()); j++) {
                     CardView cardView = new CardView(getActivity());
@@ -108,16 +88,6 @@ public class Fragment_ChuDeVaTheLoai extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
-                    int finalJ = j;
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), DanhsachbaihatActivity.class);
-                            intent.putExtra("idtheloai",theloaiArrayList.get(finalJ));
-                            Log.d("Fragment", "Starting DanhsachbaihatActivity with idtheloai: " + theloaiArrayList.get(finalJ).getIdType());
-                            startActivity(intent);
-                        }
-                    });
 
                 }
                 horizontalScrollView.addView(linearLayout);

@@ -3,9 +3,7 @@ package com.example.appmusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Theme implements Serializable {
+public class Theme {
 
 @SerializedName("id_theme")
 @Expose
