@@ -17,7 +17,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+
 import retrofit2.http.Query;
+
 
 public interface Dataservice {
      @GET("songbanner.php")
@@ -80,5 +82,11 @@ public interface Dataservice {
             @Field("phone") String phone,
             @Field("avatar") String avatar
     );
+
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<Songs>> GetSearchBaihat(@Field("tukhoa") String tukhoa);
+
+
 }
 

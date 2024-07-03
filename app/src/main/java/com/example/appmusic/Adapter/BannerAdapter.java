@@ -60,6 +60,7 @@ public class BannerAdapter extends PagerAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, DanhsachbaihatActivity.class);
                 intent.putExtra("banner",arrayListbanner.get(position));
+
                 context.startActivity(intent);
             }
         });

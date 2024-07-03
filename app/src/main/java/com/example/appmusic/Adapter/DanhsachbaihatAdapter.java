@@ -2,12 +2,14 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +26,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder>{
 
+import com.example.appmusic.Activity.DanhsachbaihatActivity;
+import com.example.appmusic.Model.Songs;
+import com.example.appmusic.R;
+
+import java.util.ArrayList;
+
+public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder> {
     Context context;
     ArrayList<Songs> mangbaihat;
-
     public DanhsachbaihatAdapter(Context context, ArrayList<Songs> mangbaihat) {
         this.context = context;
         this.mangbaihat = mangbaihat;
@@ -48,6 +55,7 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
         holder.txtcasi.setText(songs.getSinger());
         holder.txttenbaihat.setText(songs.getNameSong());
         holder.txtindex.setText(position + 1 + "");
+
 
     }
 
@@ -101,4 +109,5 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
             });
         }
     }
+
 }

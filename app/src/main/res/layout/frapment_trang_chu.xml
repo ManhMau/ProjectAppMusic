@@ -29,7 +29,9 @@
                     android:queryHint="Song name..."
                     android:background="@drawable/search_view_background"
                     app:iconifiedByDefault="false" />
+
             </LinearLayout>
+
             <fragment
                 android:id="@+id/fragmentbanner"
                 android:name="com.example.appmusic.Fragment.Fragment_Banner"
@@ -57,6 +59,7 @@
                 android:name="com.example.appmusic.Fragment.Fragment_Bai_Hat_Hot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
 </ScrollView>

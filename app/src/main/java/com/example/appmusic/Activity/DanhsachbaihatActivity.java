@@ -15,6 +15,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,6 +37,8 @@ import com.example.appmusic.Model.Banner;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.Model.Songs;
 import com.example.appmusic.Model.Type;
+import com.example.appmusic.Model.Banner;
+import com.example.appmusic.Model.Songs;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
 import com.example.appmusic.Service.Dataservice;
@@ -51,6 +62,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     RecyclerView recyclerViewdanhsachbaihat;
+
     FloatingActionButton floatingActionButton;
     ImageView imgdanhsachcakhuc;
     ArrayList<Songs> mangbaihat;
@@ -59,6 +71,9 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     Type type;
     Album album;
 
+
+
+    Banner banner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +105,19 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     private void GetDataAlbum(String idAlbum) {
         Dataservice dataservice = APIService.getService();
         Call<List<Songs>> callback = dataservice.GetDanhsanhbaihattheoalbum(idAlbum);
+        DataIntent();
+        anhxa();
+        init();
+        if (banner != null && !banner.getNameSong().equals("")) {
+            setValueInView(banner.getNameSong(),banner.getImageSong());
+            GetDataBanner(banner.getIdBanner());
+        }
+
+    }
+
+    private void GetDataBanner(String idbanner) {
+        Dataservice dataservice = APIService.getService();
+        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheobanner(idbanner);
         callback.enqueue(new Callback<List<Songs>>() {
             @Override
             public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
@@ -98,6 +126,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
                 evenClick();
+
             }
 
             @Override
@@ -190,6 +219,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
             collapsingToolbarLayout.setBackground(bitmapDrawable);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -200,6 +230,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -211,6 +242,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         floatingActionButton.setEnabled(false);
+
     }
 
     private void anhxa() {
@@ -254,3 +286,4 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         });
     }
 }
+

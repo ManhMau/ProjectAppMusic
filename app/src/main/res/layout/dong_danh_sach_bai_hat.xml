@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="5dp"
-    android:elevation="5dp"
-
-    android:layout_width="match_parent">
+    android:elevation="5dp">
     <RelativeLayout
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
-            android:text="1"
-            android:layout_margin="15dp"
             android:textSize="20sp"
-            android:id="@+id/textviewdanhsaschindex"
+            android:layout_margin="15dp"
+            android:text="1"
+            android:id="@+id/textviewdanhsachindex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textviewtenbaihat"
             android:textSize="20sp"
-            android:text="Ten ca khuc"
             android:textColor="#030303"
-            android:layout_toRightOf="@+id/textviewdanhsaschindex"
-            android:maxWidth="250dp"
-            android:ellipsize="end"
+            android:text="Ten ca khuc"
+            android:layout_toRightOf="@+id/textviewdanhsachindex"
             android:singleLine="true"
+            android:ellipsize="end"
+            android:maxWidth="250dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="#979797"
-            android:textSize="20sp"
             android:text="Ca si"
-            android:id="@+id/textviewtencasi"
-            android:layout_toRightOf="@+id/textviewdanhsaschindex"
+            android:textSize="20sp"
+            android:textColor="#979797"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_toRightOf="@+id/textviewdanhsachindex"
             android:layout_below="@+id/textviewtenbaihat"
+            android:id="@+id/textviewtencasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:layout_marginRight="5dp"
             android:src="@drawable/iconlove"
-            android:id="@+id/imageviewluotthichdanhsachbaihat"
-            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
             android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imageviewluotthichdanhsachbaihat"
             android:layout_width="30dp"
             android:layout_height="30dp"/>
     </RelativeLayout>
