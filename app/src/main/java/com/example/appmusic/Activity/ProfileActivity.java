@@ -89,9 +89,9 @@ public class ProfileActivity extends AppCompatActivity  {
         textViewPhone.setText(user.getPhone());
         String roleText;
         Integer role = Integer.valueOf(user.getRole()); // Assuming getRole() returns Integer
-        if (role != null && role.equals(1)) {
+        if (role != null && role.equals(2)) {
             roleText = "User";
-        } else if (role != null && role.equals(0)) {
+        } else if (role != null && role.equals(1)) {
             roleText = "Admin";
         } else {
             roleText = "Unknown"; // Trường hợp nếu role không phải là 0 hoặc 1 hoặc null

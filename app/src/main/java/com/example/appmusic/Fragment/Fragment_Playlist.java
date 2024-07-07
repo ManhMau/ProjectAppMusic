@@ -11,7 +11,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,22 +22,17 @@ import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
 import com.example.appmusic.Service.Dataservice;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class Fragment_Playlist extends Fragment {
-
     View view;
     ListView lvplaylist;
     TextView txttitleplaylist, txtviewxemthemplaylist;
     PlaylistAdapter playlistAdapter;
     ArrayList<Playlist> mangplaylist;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,7 +74,6 @@ public class Fragment_Playlist extends Fragment {
 
             @Override
             public void onFailure(Call<List<Playlist>> call, Throwable t) {
-
             }
         }));
     }
@@ -90,12 +83,9 @@ public class Fragment_Playlist extends Fragment {
             // pre-condition
             return;
         }
-
         int totalHeight = 0;
-
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
-
             if(listItem != null){
                 listItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
                 listItem.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
@@ -103,7 +93,6 @@ public class Fragment_Playlist extends Fragment {
                 totalHeight += listItem.getMeasuredHeight();
             }
         }
-
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
