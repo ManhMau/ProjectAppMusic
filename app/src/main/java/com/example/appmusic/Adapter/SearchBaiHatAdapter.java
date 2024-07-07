@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appmusic.Activity.PlaynhacActivity;
 import com.example.appmusic.Model.Songs;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -70,16 +71,15 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                 @Override
                 public void onClick(View v) {
 
-                   /* Intent intent = new Intent(context, PlayNhacActivity.class);
+                    Intent intent = new Intent(context, PlaynhacActivity.class);
                     intent.putExtra("cakhuc",mangbaihat.get(getPosition()));
                     context.startActivity(intent);
-*/
-                 /*   imgluotthich.setOnClickListener(new View.OnClickListener() {
+                    imgluotthich.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             imgluotthich.setImageResource(R.drawable.iconloved);
                             Dataservice dataservice = APIService.getService();
-                            Call<String> callback = dataservice.UpdaLuotThich("1",mangbaihat.get(getPosition()));
+                            Call<String> callback = dataservice.UpdateLuotThich("1", String.valueOf(mangbaihat.get(getPosition())));
                             callback.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
@@ -100,7 +100,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                             });
                             imgluotthich.setEnabled(false);
                         }
-                    });*/
+                    });
 
                 }
             });

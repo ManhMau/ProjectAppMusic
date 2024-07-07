@@ -109,7 +109,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         anhxa();
         init();
         if (banner != null && !banner.getNameSong().equals("")) {
-            setValueInView(banner.getNameSong(),banner.getImageSong());
+            setValueInview(banner.getNameSong(),banner.getImageSong());
             GetDataBanner(banner.getIdBanner());
         }
 
@@ -117,7 +117,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 
     private void GetDataBanner(String idbanner) {
         Dataservice dataservice = APIService.getService();
-        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheobanner(idbanner);
+        Call<List<Songs>> callback = dataservice.GetDanhsachbaihattheoquangcao(idbanner);
         callback.enqueue(new Callback<List<Songs>>() {
             @Override
             public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
