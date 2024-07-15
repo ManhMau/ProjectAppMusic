@@ -15,6 +15,33 @@
         android:theme="@style/Theme.AppMusic"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditSongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddSongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.QuanLyBaiHat"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.QuanLyUser"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditPlayListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddPlaylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.QuanLyPlaylis"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChangePasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false" />
         <activity
@@ -38,7 +65,12 @@
         <activity
             android:name=".Activity.DanhsachbaihatActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".Activity.LoginAppMusicActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.RegisterAppMusicActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true">

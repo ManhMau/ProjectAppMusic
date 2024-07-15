@@ -1,33 +1,52 @@
+// Songs.java
 package com.example.appmusic.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Songs implements Parcelable {
 
-@SerializedName("id_song")
-@Expose
-private String idSong;
-@SerializedName("name_song")
-@Expose
-private String nameSong;
-@SerializedName("image_song")
-@Expose
-private String imageSong;
-@SerializedName("singer")
-@Expose
-private String singer;
-@SerializedName("link_song")
-@Expose
-private String linkSong;
-@SerializedName("feedback")
-@Expose
-private String feedback;
+    @SerializedName("id_song")
+    @Expose
+    private String idSong;
+
+    @SerializedName("name_song")
+    @Expose
+    private String nameSong;
+
+    @SerializedName("image_song")
+    @Expose
+    private String imageSong;
+
+    @SerializedName("singer")
+    @Expose
+    private String singer;
+
+    @SerializedName("link_song")
+    @Expose
+    private String linkSong;
+
+    @SerializedName("feedback")
+    @Expose
+    private String feedback;
+
+    @SerializedName("id_playlist") // Foreign key id
+    @Expose
+    private int idPlaylist;
+
+    @SerializedName("id_album") // Foreign key id
+    @Expose
+    private int idAlbum;
+
+    @SerializedName("id_type") // Foreign key id
+    @Expose
+    private int idType;
+
+    public Songs() {
+    }
 
     protected Songs(Parcel in) {
         idSong = in.readString();
@@ -36,6 +55,9 @@ private String feedback;
         singer = in.readString();
         linkSong = in.readString();
         feedback = in.readString();
+        idPlaylist = in.readInt();
+        idAlbum = in.readInt();
+        idType = in.readInt();
     }
 
     public static final Creator<Songs> CREATOR = new Creator<Songs>() {
@@ -51,52 +73,76 @@ private String feedback;
     };
 
     public String getIdSong() {
-return idSong;
-}
+        return idSong;
+    }
 
-public void setIdSong(String idSong) {
-this.idSong = idSong;
-}
+    public void setIdSong(String idSong) {
+        this.idSong = idSong;
+    }
 
-public String getNameSong() {
-return nameSong;
-}
+    public String getNameSong() {
+        return nameSong;
+    }
 
-public void setNameSong(String nameSong) {
-this.nameSong = nameSong;
-}
+    public void setNameSong(String nameSong) {
+        this.nameSong = nameSong;
+    }
 
-public String getImageSong() {
-return imageSong;
-}
+    public String getImageSong() {
+        return imageSong;
+    }
 
-public void setImageSong(String imageSong) {
-this.imageSong = imageSong;
-}
+    public void setImageSong(String imageSong) {
+        this.imageSong = imageSong;
+    }
 
-public String getSinger() {
-return singer;
-}
+    public String getSinger() {
+        return singer;
+    }
 
-public void setSinger(String singer) {
-this.singer = singer;
-}
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
 
-public String getLinkSong() {
-return linkSong;
-}
+    public String getLinkSong() {
+        return linkSong;
+    }
 
-public void setLinkSong(String linkSong) {
-this.linkSong = linkSong;
-}
+    public void setLinkSong(String linkSong) {
+        this.linkSong = linkSong;
+    }
 
-public String getFeedback() {
-return feedback;
-}
+    public String getFeedback() {
+        return feedback;
+    }
 
-public void setFeedback(String feedback) {
-this.feedback = feedback;
-}
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public int getIdPlaylist() {
+        return idPlaylist;
+    }
+
+    public void setIdPlaylist(int idPlaylist) {
+        this.idPlaylist = idPlaylist;
+    }
+
+    public int getIdAlbum() {
+        return idAlbum;
+    }
+
+    public void setIdAlbum(int idAlbum) {
+        this.idAlbum = idAlbum;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
 
     @Override
     public int describeContents() {
@@ -104,12 +150,15 @@ this.feedback = feedback;
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(idSong);
-        dest.writeString(nameSong);
-        dest.writeString(imageSong);
-        dest.writeString(singer);
-        dest.writeString(linkSong);
-        dest.writeString(feedback);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(idSong);
+        parcel.writeString(nameSong);
+        parcel.writeString(imageSong);
+        parcel.writeString(singer);
+        parcel.writeString(linkSong);
+        parcel.writeString(feedback);
+        parcel.writeInt(idPlaylist);
+        parcel.writeInt(idAlbum);
+        parcel.writeInt(idType);
     }
 }

@@ -10,7 +10,6 @@ public class User implements Serializable {
     @SerializedName("id_user")
     @Expose
     private int idUser; // Sửa kiểu dữ liệu từ String thành int
-
     @SerializedName("displayname")
     @Expose
     private String displayname;
@@ -33,8 +32,10 @@ public class User implements Serializable {
 
     @SerializedName("role")
     @Expose
-    private String role;
-
+    private int role;
+    @SerializedName("active")
+    @Expose
+    private  int active;
     public int getIdUser() { // Sửa getter
         return idUser;
     }
@@ -83,11 +84,18 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
+    }
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 }

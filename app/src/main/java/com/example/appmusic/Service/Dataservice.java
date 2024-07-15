@@ -12,6 +12,7 @@ import com.example.appmusic.Model.User;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -20,7 +21,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface Dataservice {
-     @GET("songbanner.php")
+    @GET("songbanner.php")
     Call<List<Banner>> GetDataBanner();
 
     @GET("playlistforcurrentday.php")
@@ -30,7 +31,7 @@ public interface Dataservice {
     Call<ChuDeVaTheLoai> GetDataChuDeVaTheLoai();
 
     @GET("albumhot.php")
-        Call<List<Album>> GetAlbumHot();
+    Call<List<Album>> GetAlbumHot();
 
     @GET("baihatyeuthich.php")
     Call<List<Songs>> GetBaiHatHot();
@@ -83,5 +84,41 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("searchbaihat.php")
     Call<List<Songs>> GetSearchBaihat(@Field("tukhoa") String tukhoa);
+
+    @FormUrlEncoded
+    @POST("login.php")
+    Call<User> login(
+            @Field("mail") String mail,
+            @Field("passwords") String password
+    );
+    @FormUrlEncoded
+    @POST("check_email.php")
+    Call<ResponseBody> checkEmailExistence(
+            @Field("mail") String mail
+    );
+    @FormUrlEncoded
+    @POST("register.php")
+    Call<User> register(
+            @Field("displayname") String name,
+            @Field("mail") String mail,
+            @Field("phone") String phone,
+            @Field("passwords") String password,
+            @Field("avatar") String avatar
+    );
+    @FormUrlEncoded
+    @POST("changepassword.php")
+    Call<ResponseBody> changePassword(
+            @Field("id_user") int id_user,
+            @Field("passwords") String newPassword
+    );
+
+    @GET("danhsachcacplaylistAdmin.php")
+    Call<List<Playlist>> GetDanhsachcaPlaylist();
+
+    @GET("danhsachuserAdmin.php")
+    Call<List<User>> GetUser();
+
+    @GET("danhsachbaihatAdmin.php")
+    Call<List<Songs>> GetSongs();
 }
 

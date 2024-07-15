@@ -2,8 +2,10 @@ package com.example.appmusic.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -93,8 +95,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
 
         } else if (id == R.id.change_password) {
-
+            Intent intent = new Intent(this, ChangePasswordActivity.class);
+            startActivity(intent);
         } else if (id == R.id.sign_out) {
+            signOut();
         }
         if (selectedFragment != null) {
             loadFragment(selectedFragment);
@@ -110,5 +114,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+    private void signOut() {
+        // Clear user session data (e.g., userId)
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("userId");
+        editor.apply();
+        Toast.makeText(this, "Sign out successful", Toast.LENGTH_SHORT).show();
+        // Redirect to login activity
+        Intent intent = new Intent(this, LoginAppMusicActivity.class);
+        startActivity(intent);
+        finish(); // Close MainActivity
     }
 }
