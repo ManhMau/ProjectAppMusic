@@ -1,4 +1,3 @@
-// Songs.java
 package com.example.appmusic.Model;
 
 import android.os.Parcel;
@@ -45,6 +44,10 @@ public class Songs implements Parcelable {
     @Expose
     private int idType;
 
+    @SerializedName("isLiked")
+    @Expose
+    private boolean isLiked;
+
     public Songs() {
     }
 
@@ -58,6 +61,7 @@ public class Songs implements Parcelable {
         idPlaylist = in.readInt();
         idAlbum = in.readInt();
         idType = in.readInt();
+        isLiked = in.readByte() != 0;
     }
 
     public static final Creator<Songs> CREATOR = new Creator<Songs>() {
@@ -144,6 +148,14 @@ public class Songs implements Parcelable {
         this.idType = idType;
     }
 
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -160,5 +172,6 @@ public class Songs implements Parcelable {
         parcel.writeInt(idPlaylist);
         parcel.writeInt(idAlbum);
         parcel.writeInt(idType);
+        parcel.writeByte((byte) (isLiked ? 1 : 0));
     }
 }

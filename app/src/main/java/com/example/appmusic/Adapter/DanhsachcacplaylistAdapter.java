@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appmusic.Activity.DanhsachbaihatActivity;
-import com.example.appmusic.Activity.DanhsachcacplaylistActivity;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;

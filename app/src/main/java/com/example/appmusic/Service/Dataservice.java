@@ -10,6 +10,7 @@ import com.example.appmusic.Model.Theme;
 import com.example.appmusic.Model.Type;
 import com.example.appmusic.Model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -67,7 +68,7 @@ public interface Dataservice {
 
     @FormUrlEncoded
     @POST("updateluotthich.php")
-    Call<String> UpdateLuotThich(@Field("luotthich")String luotthich, @Field("idbaihat") String idbaihat);
+    Call<String> updateLuotThich(@Field("luotthich") String luotthich, @Field("idbaihat") String idbaihat, @Field("id_user") int id_user);
 
     @GET("profileuser.php")
     Call<User> getUserInfo(@Query("id_user") int id_user);
@@ -120,5 +121,13 @@ public interface Dataservice {
 
     @GET("danhsachbaihatAdmin.php")
     Call<List<Songs>> GetSongs();
+    @FormUrlEncoded
+    @POST("getLikedSongs.php")
+    Call<List<Songs>> getLikedSongs(@Field("id_user") int id_user);
+
+    @FormUrlEncoded
+    @POST("getLikedSongs.php")
+    Call<ArrayList<Songs>> getUserLikedSongs(@Field("id_user") int userId);
+
 }
 

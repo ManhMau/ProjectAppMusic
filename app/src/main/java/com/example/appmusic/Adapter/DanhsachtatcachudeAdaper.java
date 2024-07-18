@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appmusic.Activity.DanhsachtatcachudeActivity;
 import com.example.appmusic.Activity.DanhsachtheloaitheochudeActivity;
 import com.example.appmusic.Model.Theme;
 import com.example.appmusic.R;
